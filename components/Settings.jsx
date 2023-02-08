@@ -1,4 +1,5 @@
 import DarkModeToggle from "./DarkModeToggle";
+import LanguageSelect from "./LanguageSelect";
 
 export default function Settings() {
 	return (
@@ -7,6 +8,7 @@ export default function Settings() {
 				<span className="absolute -top-[6px]">🛠</span>
 			</div>
 			<DarkModeToggle />
+			<LanguageSelect />
 		</div>
 	);
 }
