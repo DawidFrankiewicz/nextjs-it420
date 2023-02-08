@@ -1,43 +1,22 @@
-import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 export default function DarkModeToggle() {
-	const [language, setLanguage] = useState("");
+	const { locale, locales, push } = useRouter();
 
-	function changeMode() {
-		const currentLanguage = document.documentElement.dataset.language;
-		currentLanguage === "pl" ? setEn() : setPl();
+	function changeLang() {
+		locale === "en" ? setLanguage("pl") : setLanguage("en");
 	}
 
-	const setEn = () => {
-		document.documentElement.dataset.language = "en";
-		localStorage.language = "en";
-		setLanguage("en");
+	const setLanguage = (language) => {
+		push("/", undefined, { locale: language });
 	};
 
-	const setPl = () => {
-		document.documentElement.dataset.language = "pl";
-		localStorage.language = "pl";
-		setLanguage("pl");
-	};
-
-	useEffect(() => {
-		// On page load or when changing themes, best to add inline in `head` to avoid FOUC
-		if (
-			localStorage.language === "pl" ||
-			(!("language" in localStorage) &&
-				window.matchMedia("(prefers-color-scheme: dark)").matches)
-		) {
-			setPl();
-		} else {
-			setEn();
-		}
-	}, []);
 	return (
 		<button
-			onClick={changeMode}
+			onClick={changeLang}
 			className="bg-red-500 text-white py-1 rounded hover:bg-red-600 w-[4ch] uppercase"
 		>
-			{language}
+			{locale}
 		</button>
 	);
 }
