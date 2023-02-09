@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "next-i18next";
 
 export default function DarkModeToggle() {
+	const { t } = useTranslation();
 	const [mode, setMode] = useState("");
 
 	function changeMode() {
@@ -34,9 +36,9 @@ export default function DarkModeToggle() {
 	return (
 		<button
 			onClick={changeMode}
-			className="bg-red-500 text-white w-[6ch] py-1 rounded hover:bg-red-600 capitalize text-center"
+			className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 capitalize text-center"
 		>
-			{mode}
+			{t(mode)}
 		</button>
 	);
 }

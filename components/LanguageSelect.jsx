@@ -5,6 +5,11 @@ export default function DarkModeToggle() {
 
 	function changeLang() {
 		locale === "en" ? setLanguage("pl") : setLanguage("en");
+		if (locale === "en") {
+			setLanguage("pl");
+		} else if (locale === "pl") {
+			setLanguage("nl");
+		} else if (locale === "nl") setLanguage("en");
 	}
 
 	const setLanguage = (language) => {

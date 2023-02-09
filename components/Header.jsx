@@ -15,6 +15,7 @@ export default function Header({ routes }) {
 									: "text-white dark:text-slate-900"
 							}`}
 							href={route.path}
+							key={route.path}
 						>
 							{route.name}
 						</Link>
