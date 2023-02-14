@@ -18,20 +18,23 @@ export default function Header({ routes }) {
 
 	// Set decoration lane width and offset on page load and on locale change
 	useEffect(() => {
-		window.addEventListener("resize", resetDecorationStyles);
 		// Timeout is needed to prevent using wrong width and offset values on locale change
 		setTimeout(() => {
 			resetDecorationStyles();
-		}, 1);
+		}, 20);
+	}, [router.locale]);
+
+	useEffect(() => {
+		window.addEventListener("resize", resetDecorationStyles);
 		// fixes bug where decoration lane is moving on page load
 		setTimeout(() => {
 			setLoaded(true);
-		}, 2);
+		}, 40);
 		return () => {
 			// Cleanup
 			window.removeEventListener("resize", resetDecorationStyles);
 		};
-	}, [router.locale]);
+	}, []);
 
 	// Computed styles for decoration
 	const decorationStyle = {
@@ -52,9 +55,9 @@ export default function Header({ routes }) {
 	};
 
 	return (
-		<header className="relative bg-black dark:bg-neutral-800 p-2 left-0 w-full top-0 shadow-md">
+		<header className="relative bg-black dark:bg-neutral-800 p-2 left-0 w-full top-0 shadow-md transition-colors">
 			<div className="container mx-auto flex justify-between items-center">
-				<div>
+				<div className="flex gap-6">
 					<Link
 						href="/"
 						className="no-underline text-white dark:text-white hover:text-white hover:dark:text-white font-semibold text-4xl bg-neutral-800 dark:bg-black rounded-lg w-12 h-12 inline-flex justify-center items-center select-none"
@@ -74,13 +77,13 @@ export default function Header({ routes }) {
 							onMouseOver={setDecorationStyles}
 							onFocus={setDecorationStyles}
 							className={`font-bold transition-colors py-2 hover:text-white dark:hover:text-white no-underline ${
-								router.asPath == route.path
+								router.pathname == route.path
 									? "text-white dark:text-white"
 									: "text-neutral-300 dark:text-neutral-300"
 							}`}
 							href={route.path}
 							key={route.path}
-							{...(router.asPath == route.path && { ref: activeElement })}
+							{...(router.pathname == route.path && { ref: activeElement })}
 						>
 							{t(route.name)}
 						</Link>
