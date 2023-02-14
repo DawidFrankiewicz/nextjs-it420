@@ -1,5 +1,5 @@
-import Header from "./Header";
-import Settings from "./Settings";
+import Header from "../components/Header";
+import Settings from "../components/Settings";
 import Script from "next/script";
 
 export default function Layout({ children }) {
@@ -38,9 +38,11 @@ export default function Layout({ children }) {
                     `,
 				}}
 			/>
-			<Header routes={headerRoutes} />
-			<Settings />
-			<main>{children}</main>
+			<div className="app">
+				<Header routes={headerRoutes} />
+				<Settings />
+				<main>{children}</main>
+			</div>
 		</>
 	);
 }
