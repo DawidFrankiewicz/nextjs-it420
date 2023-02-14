@@ -1,13 +1,12 @@
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import Layout from "../layouts/Layout";
 
 export default function Home() {
 	return (
-		<Layout>
+		<>
 			<h1 className="container mx-auto my-4 text-6xl font-bold">
 				Contact page
 			</h1>
-		</Layout>
+		</>
 	);
 }
 

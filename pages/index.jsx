@@ -1,12 +1,11 @@
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Hero from "../components/Hero";
-import Layout from "../layouts/Layout";
 
 export default function Home() {
 	return (
-		<Layout>
+		<>
 			<Hero />
-		</Layout>
+		</>
 	);
 }
 
