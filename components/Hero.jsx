@@ -30,7 +30,7 @@ export default function Hero() {
 		>
 			<img
 				className="select-none absolute right-0 top-0 -z-20 w-[1100px] h-full object-cover"
-				src="/images/web-1.jpg"
+				src="/images/web-1.webp"
 				alt=""
 			/>
 			<span className="absolute -z-10 right-0 top-0 w-[1100px] h-full bg-gradient-to-r from-white dark:from-black to-transparent"></span>

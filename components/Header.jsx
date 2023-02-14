@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
+import Settings from "./Settings";
 
 export default function Header({ routes }) {
 	// Translation and router
@@ -60,6 +61,7 @@ export default function Header({ routes }) {
 					>
 						it
 					</Link>
+					<Settings />
 				</div>
 				<div
 					className="relative text-2xl flex gap-6 w-fit"
