@@ -9,7 +9,11 @@ module.exports = {
 		container: {
 			center: true,
 		},
-		extend: {},
+		extend: {
+			borderWidth: {
+				1: "1px",
+			},
+		},
 	},
 	plugins: [],
 };

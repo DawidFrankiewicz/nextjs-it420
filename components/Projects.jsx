@@ -11,7 +11,8 @@ export default function Projects({ projects }) {
 						{projects.map((project) => (
 							<div
 								key={project.name}
-								className="bg-black/10 dark:bg-white/10 w-full sm:w-[66%] lg:w-[36%] snap-start h-auto shadow-lg rounded-lg bg-cover aspect-video flex-shrink-0"
+								className="bg-black/10 w-full sm:w-[66%] lg:w-[36%] snap-start h-auto border-neutral-200 border-1 rounded-lg bg-cover aspect-video flex-shrink-0
+                                dark:bg-white/10 dark:border-neutral-800"
 								style={{ backgroundImage: `url(${project.thumbnail})` }}
 							></div>
 						))}
