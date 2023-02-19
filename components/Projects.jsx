@@ -2,17 +2,20 @@ import React from "react";
 
 export default function Projects({ projects }) {
 	return (
-		<div className="relative z-30 px-5 -mt-32 mb-32 overflow-x-clip ">
+		<div className="relative z-30 px-5 -mt-44 mb-32">
 			<div className="2xl:container">
 				<h2 className="text-4xl mb-5">Projekty</h2>
-				<div className="flex gap-5">
-					{projects.map((project) => (
-						<div
-							key={project.name}
-							className="bg-black/10 dark:bg-white/10 w-[600px] max-w-[unset]: shadow-lg rounded-lg p-5 aspect-video bg-cover"
-							style={{ backgroundImage: `url(${project.thumbnail})` }}
-						></div>
-					))}
+
+				<div className="relative">
+					<div className="flex gap-14 overflow-x-scroll snap-x snap-mandatory no-scrollbar scroll-pl-[1px]">
+						{projects.map((project) => (
+							<div
+								key={project.name}
+								className="bg-black/10 dark:bg-white/10 w-[36%] min-w-64 snap-start h-auto shadow-lg rounded-lg bg-cover aspect-video flex-shrink-0"
+								style={{ backgroundImage: `url(${project.thumbnail})` }}
+							></div>
+						))}
+					</div>
 				</div>
 			</div>
 		</div>
