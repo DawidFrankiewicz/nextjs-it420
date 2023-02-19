@@ -33,9 +33,9 @@ export default function Hero() {
 				src="/images/web-1.webp"
 				alt=""
 			/>
-			<span className="absolute -z-10 right-0 top-0 w-[1100px] h-full bg-gradient-to-r from-white dark:from-black to-transparent"></span>
-			<span className="absolute -z-10 right-0 top-0 w-[1100px] h-full bg-gradient-to-tr from-white dark:from-black to-transparent"></span>
-			<span className="absolute -z-10 right-0 top-0 w-[1100px] h-full bg-gradient-to-t stop- from-white via-transparent dark:from-black to-transparent"></span>
+			<span className="absolute -z-10 right-0 top-0 -bottom-1 w-[1100px] bg-gradient-to-r from-white dark:from-black to-transparent"></span>
+			<span className="absolute -z-10 right-0 top-0 -bottom-1 w-[1100px] bg-gradient-to-tr from-white dark:from-black to-transparent"></span>
+			<span className="absolute -z-10 right-0 -bottom-1 top-0 w-[1100px] bg-gradient-to-t stop- from-white via-transparent dark:from-black to-transparent"></span>
 			<div className="2xl:container z-10">
 				<h1 className="text-5xl font-bold mb-3">
 					Profesionalne strony internetowe
