@@ -54,12 +54,13 @@ export default function LanguageSelect() {
 									href={asPath}
 									locale={localeSingle}
 									onFocus={openLanguagesMenuArrow}
+									onClick={closeLanguagesMenuArrow}
 									className="text-white bg-neutral-500 h-10 items-center justify-center px-1 w-[5ch] uppercase text-center no-underline
-                                hover:bg-neutral-800 hover:text-white
-                                dark:text-white
-                                dark:hover:bg-black dark:hover:text-white
-                                hidden group-focus-within:flex group-focus:flex
-                                group-first/item:rounded-t-lg group-last/item:rounded-b-lg"
+                                    hover:bg-neutral-800 hover:text-white
+                                    dark:text-white
+                                    dark:hover:bg-black dark:hover:text-white
+                                    hidden group-focus-within:flex group-focus:flex
+                                    group-first/item:rounded-t-lg group-last/item:rounded-b-lg"
 								>
 									{localeSingle}
 								</Link>
