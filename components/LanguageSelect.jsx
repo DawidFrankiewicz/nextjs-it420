@@ -3,70 +3,71 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { ArrowDownIcon } from "@heroicons/react/24/solid";
 
-export default function DarkModeToggle() {
+export default function LanguageSelect() {
 	const router = useRouter();
 	const { locale, locales, asPath } = router;
 
-	const menu = useRef();
+	const languageMenu = useRef();
 
 	const [open, setOpen] = useState(false);
 
-	useEffect(() => {
-		document.addEventListener("click", handleClickOutside);
-		return () => {
-			// Cleanup
-			document.removeEventListener("click", handleClickOutside);
-		};
-	}, []);
-
-	const toggleLanguagesMenu = () => {
-		setOpen(!open);
+	const openLanguagesMenuArrow = () => {
+		setOpen(true);
 	};
-
-	const handleClickOutside = (e) => {
-		if (menu.current && !menu.current.contains(e.target)) {
-			setOpen(false);
-		}
+	const closeLanguagesMenuArrow = () => {
+		setOpen(false);
+	};
+	const focusLanguagesMenu = () => {
+		languageMenu.current.focus();
 	};
 
 	return (
-		<div className="relative h-full" ref={menu}>
+		<div className="relative h-full">
 			<button
-				className={`text-white h-full px-1 w-[5ch] uppercase text-center no-underline
+				className={`text-white h-full px-1 w-[5ch] uppercase text-center no-underline rounded-lg
                 hover:bg-neutral-800
                 dark:hover:bg-black
                 ${open ? "bg-neutral-500 dark:bg-black" : null}}`}
-				onClick={toggleLanguagesMenu}
+				onClick={() => {
+					openLanguagesMenuArrow();
+					focusLanguagesMenu();
+				}}
 			>
 				{locale}{" "}
 				<ArrowDownIcon
-					className={`inline w-4 h-4 transition-transform ${
-						open ? "rotate-180" : null
-					}`}
+					className={`inline w-4 h-4 transition-transform peer-focus-within:rotate-180 peer-focus:rotate-180
+                    ${open ? "rotate-180" : null}`}
 				/>
 			</button>
-			<div
-				className={`absolute top-full z-10 ${
-					open ? "flex flex-col" : "hidden"
-				}`}
+			<nav
+				className="group absolute top-full z-50 rounded-lg"
+				tabIndex={-1}
+				ref={languageMenu}
+				onBlur={closeLanguagesMenuArrow}
 			>
-				{locales.map((localeSingle) => {
-					if (locale == localeSingle) return;
-					return (
-						<Link
-							key={localeSingle}
-							href={asPath}
-							locale={localeSingle}
-							className="text-white bg-neutral-500 h-10 flex items-center justify-center px-1 w-[5ch] uppercase text-center no-underline
-                            hover:bg-neutral-800 hover:text-white
-                            dark:text-white
-                            dark:hover:bg-black dark:hover:text-white"
-						>
-							{localeSingle}
-						</Link>
-					);
-				})}
-			</div>
+				<ul>
+					{locales.map((localeSingle) => {
+						if (locale == localeSingle) return;
+						return (
+							<li className="group/item" key={localeSingle}>
+								<Link
+									href={asPath}
+									locale={localeSingle}
+									onFocus={openLanguagesMenuArrow}
+									className="text-white bg-neutral-500 h-10 items-center justify-center px-1 w-[5ch] uppercase text-center no-underline
+                                hover:bg-neutral-800 hover:text-white
+                                dark:text-white
+                                dark:hover:bg-black dark:hover:text-white
+                                hidden group-focus-within:flex group-focus:flex
+                                group-first/item:rounded-t-lg group-last/item:rounded-b-lg"
+								>
+									{localeSingle}
+								</Link>
+							</li>
+						);
+					})}
+				</ul>
+			</nav>
 		</div>
 	);
 }

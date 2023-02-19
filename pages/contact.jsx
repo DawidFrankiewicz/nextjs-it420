@@ -3,9 +3,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 export default function Home() {
 	return (
 		<>
-			<h1 className="container mx-auto my-4 text-6xl font-bold">
-				Contact page
-			</h1>
+			<h1 className="2xl:container my-4 text-6xl font-bold">Contact page</h1>
 		</>
 	);
 }

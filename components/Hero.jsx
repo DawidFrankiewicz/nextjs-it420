@@ -35,7 +35,8 @@ export default function Hero() {
 			/>
 			<span className="absolute -z-10 right-0 top-0 w-[1100px] h-full bg-gradient-to-r from-white dark:from-black to-transparent"></span>
 			<span className="absolute -z-10 right-0 top-0 w-[1100px] h-full bg-gradient-to-tr from-white dark:from-black to-transparent"></span>
-			<div className="container z-10 mx-auto">
+			<span className="absolute -z-10 right-0 top-0 w-[1100px] h-full bg-gradient-to-t stop- from-white via-transparent dark:from-black to-transparent"></span>
+			<div className="2xl:container z-10">
 				<h1 className="text-5xl font-bold mb-3">
 					Profesionalne strony internetowe
 				</h1>

@@ -6,6 +6,9 @@ module.exports = {
 	],
 	darkMode: ["class", '[data-mode="dark"]'],
 	theme: {
+		container: {
+			center: true,
+		},
 		extend: {},
 	},
 	plugins: [],

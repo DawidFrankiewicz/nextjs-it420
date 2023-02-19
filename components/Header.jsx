@@ -21,7 +21,7 @@ export default function Header({ routes }) {
 		// Timeout is needed to prevent using wrong width and offset values on locale change
 		setTimeout(() => {
 			resetDecorationStyles();
-		}, 20);
+		}, 10);
 	}, [router.locale]);
 
 	useEffect(() => {
@@ -48,7 +48,7 @@ export default function Header({ routes }) {
 		setOffset(e.target.offsetLeft);
 	};
 
-	// Reset decoration lane styles
+	// Reset decoration lane styles to default
 	const resetDecorationStyles = () => {
 		setWidth(activeElement.current.clientWidth);
 		setOffset(activeElement.current.offsetLeft);
@@ -56,7 +56,7 @@ export default function Header({ routes }) {
 
 	return (
 		<header className="relative bg-black dark:bg-neutral-800 p-2 left-0 w-full top-0 shadow-md transition-colors">
-			<div className="container mx-auto flex justify-between items-center">
+			<div className="2xl:container flex justify-between items-center">
 				<div className="flex gap-6">
 					<Link
 						href="/"
@@ -66,36 +66,41 @@ export default function Header({ routes }) {
 					</Link>
 					<Settings />
 				</div>
-				<div
-					className="relative text-2xl flex gap-6 w-fit"
-					onMouseLeave={resetDecorationStyles}
-					onBlur={resetDecorationStyles}
-				>
-					{/* Menu items loop */}
-					{routes.map((route) => (
-						<Link
-							onMouseOver={setDecorationStyles}
-							onFocus={setDecorationStyles}
-							className={`font-bold transition-colors py-2 hover:text-white dark:hover:text-white no-underline ${
-								router.pathname == route.path
-									? "text-white dark:text-white"
-									: "text-neutral-300 dark:text-neutral-300"
-							}`}
-							href={route.path}
-							key={route.path}
-							{...(router.pathname == route.path && { ref: activeElement })}
-						>
-							{t(route.name)}
-						</Link>
-					))}
+				<nav className="relative text-2xl w-fit">
+					<ul
+						className="flex gap-6"
+						onMouseLeave={resetDecorationStyles}
+						onBlur={resetDecorationStyles}
+					>
+						{routes.map((route) => (
+							<li
+								key={route.path}
+								className="flex"
+								onMouseOver={setDecorationStyles}
+								onFocus={setDecorationStyles}
+								{...(router.pathname == route.path && { ref: activeElement })}
+							>
+								<Link
+									className={`font-bold transition-colors py-2 hover:text-white dark:hover:text-white no-underline ${
+										router.pathname == route.path
+											? "text-white dark:text-white"
+											: "text-neutral-300 dark:text-neutral-300"
+									}`}
+									href={route.path}
+								>
+									{t(route.name)}
+								</Link>
+							</li>
+						))}
+					</ul>
 					{/* Decorative bar */}
 					<span
-						className={`absolute bottom-1 left-0 w-10 border-b-2 border-b-white ${
+						className={`absolute bottom-1 left-0 border-b-2 border-b-white ${
 							loaded ? "transition-all" : null
 						}`}
 						style={decorationStyle}
 					></span>
-				</div>
+				</nav>
 			</div>
 		</header>
 	);
