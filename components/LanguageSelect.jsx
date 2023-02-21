@@ -7,30 +7,28 @@ export default function LanguageSelect() {
 	const router = useRouter();
 	const { locale, locales, asPath } = router;
 
-	const languageMenu = useRef();
-
 	const [open, setOpen] = useState(false);
 
-	const openLanguagesMenuArrow = () => {
-		setOpen(true);
-	};
-	const closeLanguagesMenuArrow = () => {
-		setOpen(false);
-	};
-	const focusLanguagesMenu = () => {
-		languageMenu.current.focus();
+	const toggleLanguagesMenu = () => {
+		setOpen(!open);
 	};
 
 	return (
-		<div className="relative h-full">
+		<div
+			className="relative h-full"
+			onBlur={(e) => {
+				// Prevents the menu from closing when clicking on a language item with dataset attribute
+				if (e.relatedTarget?.dataset?.noBlurLanguageItem) return;
+				setOpen(false);
+			}}
+		>
 			<button
 				className={`text-white h-full px-1 w-[5ch] uppercase text-center no-underline rounded-lg
                 hover:bg-neutral-800
                 dark:hover:bg-black
-                ${open ? "bg-neutral-500 dark:bg-black" : null}}`}
+                ${open ? "bg-neutral-500 dark:bg-black" : null}`}
 				onClick={() => {
-					openLanguagesMenuArrow();
-					focusLanguagesMenu();
+					toggleLanguagesMenu();
 				}}
 			>
 				{locale}{" "}
@@ -39,12 +37,7 @@ export default function LanguageSelect() {
                     ${open ? "rotate-180" : null}`}
 				/>
 			</button>
-			<nav
-				className="group absolute top-full z-50 rounded-lg"
-				tabIndex={-1}
-				ref={languageMenu}
-				onBlur={closeLanguagesMenuArrow}
-			>
+			<nav className="group absolute top-full z-50 rounded-lg">
 				<ul>
 					{locales.map((localeSingle) => {
 						if (locale == localeSingle) return;
@@ -53,14 +46,13 @@ export default function LanguageSelect() {
 								<Link
 									href={asPath}
 									locale={localeSingle}
-									onFocus={openLanguagesMenuArrow}
-									onClick={closeLanguagesMenuArrow}
-									className="text-white bg-neutral-500 h-10 items-center justify-center px-1 w-[5ch] uppercase text-center no-underline
+									data-no-blur-language-item
+									className={`text-white bg-neutral-500 h-10 items-center justify-center px-1 w-[5ch] uppercase text-center no-underline
                                     hover:bg-neutral-800 hover:text-white
                                     dark:text-white
                                     dark:hover:bg-black dark:hover:text-white
-                                    hidden group-focus-within:flex group-focus:flex
-                                    group-first/item:rounded-t-lg group-last/item:rounded-b-lg"
+                                    group-first/item:rounded-t-lg group-last/item:rounded-b-lg
+                                    ${open ? "flex" : "hidden"}`}
 								>
 									{localeSingle}
 								</Link>
