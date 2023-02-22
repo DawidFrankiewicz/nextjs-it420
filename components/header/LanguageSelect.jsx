@@ -13,15 +13,14 @@ export default function LanguageSelect() {
 		setOpen(!open);
 	};
 
+	const closeLanguagesMenu = (e) => {
+		// Prevents the menu from closing when clicking on a language item with dataset attribute
+		if (e.relatedTarget?.dataset?.noBlurLanguageItem) return;
+		setOpen(false);
+	};
+
 	return (
-		<div
-			className="relative h-full"
-			onBlur={(e) => {
-				// Prevents the menu from closing when clicking on a language item with dataset attribute
-				if (e.relatedTarget?.dataset?.noBlurLanguageItem) return;
-				setOpen(false);
-			}}
-		>
+		<div className="relative h-full" onBlur={closeLanguagesMenu}>
 			<button
 				className={`text-white h-full px-1 w-[5ch] uppercase text-center no-underline rounded-lg
                 hover:bg-neutral-800
@@ -47,6 +46,7 @@ export default function LanguageSelect() {
 									href={asPath}
 									locale={localeSingle}
 									data-no-blur-language-item
+									onClick={closeLanguagesMenu}
 									className={`text-white bg-neutral-500 h-10 items-center justify-center px-1 w-[5ch] uppercase text-center no-underline
                                     hover:bg-neutral-800 hover:text-white
                                     dark:text-white

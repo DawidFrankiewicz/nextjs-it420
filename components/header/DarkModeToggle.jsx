@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
-import { useTranslation } from "next-i18next";
 import { MoonIcon, SunIcon } from "@heroicons/react/24/solid";
 
 export default function DarkModeToggle() {
-	const { t } = useTranslation();
 	const [mode, setMode] = useState("");
 
 	function changeMode() {
@@ -43,9 +41,9 @@ export default function DarkModeToggle() {
             dark:hover:bg-black"
 		>
 			{mode === "dark" ? (
-				<MoonIcon className="w-6 h-6" />
-			) : (
 				<SunIcon className="w-6 h-6" />
+			) : (
+				<MoonIcon className="w-6 h-6" />
 			)}
 		</button>
 	);

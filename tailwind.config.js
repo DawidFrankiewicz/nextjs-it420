@@ -10,6 +10,9 @@ module.exports = {
 			center: true,
 		},
 		extend: {
+			screens: {
+				xs: "450px",
+			},
 			borderWidth: {
 				1: "1px",
 			},
