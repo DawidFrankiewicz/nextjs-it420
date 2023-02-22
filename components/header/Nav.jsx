@@ -64,7 +64,6 @@ export default function Nav({ routes }) {
 
 	const closeMobileMenu = (e) => {
 		// Prevents the menu from closing when clicking on a language item with dataset attribute
-		console.log(e.relatedTarget);
 		if (e.relatedTarget?.dataset?.noBlurMobileNavItem) return;
 		setMobileMenuOpen(false);
 	};
