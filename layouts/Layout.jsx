@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Header from "../components/header/Header";
 import Script from "next/script";
 
@@ -17,9 +18,26 @@ export default function Layout({ children }) {
 		},
 	];
 
+	// Header page offset for sticky header
+	const [headerPageOffset, setHeaderPageOffset] = useState(64);
+	useEffect(() => {
+		getHeaderPageOffset();
+		window.addEventListener("resize", getHeaderPageOffset);
+		return () => {
+			window.removeEventListener("resize", getHeaderPageOffset);
+		};
+	}, []);
+
+	const getHeaderPageOffset = () => {
+		const header = document.querySelector("header");
+		const headerHeight = header.offsetHeight;
+		setHeaderPageOffset(headerHeight);
+	};
+
 	return (
 		<>
 			<Script
+				// This is the script that loads the color mode on page load early enough to prevent a flash of light mode
 				dangerouslySetInnerHTML={{
 					__html: `
                     function loadColorMode() {
@@ -37,7 +55,7 @@ export default function Layout({ children }) {
                     `,
 				}}
 			/>
-			<div className="app">
+			<div className="app" style={{ paddingTop: headerPageOffset + "px" }}>
 				<Header routes={headerRoutes} />
 				<main>{children}</main>
 			</div>
